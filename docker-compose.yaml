@@ -1,0 +1,21 @@
+#
+version: '3.6'
+services:
+  gcloud_A:
+    image: gcloud:A
+    volumes:
+      - './config:/root/.config'
+    command:
+      - tail
+      - -F
+      - /var/log/faillog
+
+  gcloud_B:
+    image: gcloud:B
+    volumes:
+      - './config:/root/.config'
+    command:
+      - tail
+      - -F
+      - /var/log/faillog
+

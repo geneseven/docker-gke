@@ -1,0 +1,11 @@
+
+selectDeploy=$(for x in frontend api istio;do echo $x;done |fzf)
+if [[ $selectDeploy = "frontend" ]];then
+  watch -n3 "kubectl get pod -owide -A --sort-by='.metadata.creationTimestamp' | egrep '(<frontend>)'"
+elif [[ $selectDeploy = "api" ]];then
+  watch -n3 "kubectl get pod -owide -A --sort-by='.metadata.creationTimestamp'| egrep '(<api>)'"
+elif [[ $selectDeploy = "istio" ]];then
+  watch -n3 "kubectl get pod -owide -A --sort-by='.metadata.creationTimestamp'| egrep 'istio-operator|istio-ingressgateway|istiod|jaeger|kiali'"
+fi
+  
+

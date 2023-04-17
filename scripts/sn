@@ -1,0 +1,4 @@
+
+selectNode=$(kubectl get node -o custom-columns=name:.metadata.name --no-headers|fzf)
+watch -n3 "kubectl get pod -owide -A --sort-by='.metadata.creationTimestamp'| grep $selectNode"
+
